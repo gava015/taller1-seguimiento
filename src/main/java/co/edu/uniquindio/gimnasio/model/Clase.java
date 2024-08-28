@@ -20,7 +20,6 @@ public class Clase {
     private Entrenador entrenador;
     private List <Inscripcion> listaInscritos;
 
-
     public Clase() {
     }
 

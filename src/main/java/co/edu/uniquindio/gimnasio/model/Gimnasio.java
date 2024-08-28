@@ -15,7 +15,6 @@ public class Gimnasio {
     private List<Clase> listaClases;
 
 
-
     public String crearCliente(String nombre, String id, String correo, String direccion, String telefono, String contraseña) {
         Cliente cliente = obtenerCliente(id);
         if (cliente == null) {
@@ -29,8 +28,8 @@ public class Gimnasio {
 
 
     public Cliente obtenerCliente(String id) {
-        for(Cliente cliente:listaClientes){
-            if(cliente.getId().equalsIgnoreCase(id)){
+        for (Cliente cliente : listaClientes) {
+            if (cliente.getId().equalsIgnoreCase(id)) {
                 return cliente;
             }
         }
@@ -38,23 +37,23 @@ public class Gimnasio {
     }
 
 
-    public boolean actualizarCliente(String id, String nombre, String correo, String contrasenia){
+    public boolean actualizarCliente(String id, String nombre, String correo, String contrasenia) {
         Cliente clienteActualizar = obtenerCliente(id);
-        if(clienteActualizar != null){
+        if (clienteActualizar != null) {
             clienteActualizar.setNombre(nombre);
             clienteActualizar.setCorreo(correo);
             clienteActualizar.setContrasenia(contrasenia);
-            return  true;
+            return true;
 
         }
         return false;
     }
 
-    public boolean eliminarCliente(String id){
+    public boolean eliminarCliente(String id) {
         Cliente clienteEliminado = obtenerCliente(id);
-        if(clienteEliminado != null){
+        if (clienteEliminado != null) {
             listaClientes.remove(clienteEliminado);
-            return  true;
+            return true;
         }
         return false;
     }
@@ -64,7 +63,7 @@ public class Gimnasio {
     public String crearEntrenador(String nombre, String id, String especialidad) {
         Entrenador entrenador = obtenerEntrenador(id);
         if (entrenador == null) {
-            entrenador = new Entrenador(nombre,id,especialidad);
+            entrenador = new Entrenador(nombre, id, especialidad);
             listaEntrenadores.add(entrenador);
             return "Entrenador creado con existo";
         } else {
@@ -74,8 +73,8 @@ public class Gimnasio {
 
 
     public Entrenador obtenerEntrenador(String id) {
-        for(Entrenador entrenador:listaEntrenadores){
-            if(entrenador.getId().equalsIgnoreCase(id)){
+        for (Entrenador entrenador : listaEntrenadores) {
+            if (entrenador.getId().equalsIgnoreCase(id)) {
                 return entrenador;
             }
         }
@@ -83,22 +82,22 @@ public class Gimnasio {
     }
 
 
-    public boolean actualizarEntrenador(String nombre, String id, String especialidad){
+    public boolean actualizarEntrenador(String nombre, String id, String especialidad) {
         Entrenador entranadorActualizado = obtenerEntrenador(id);
-        if(entranadorActualizado != null){
+        if (entranadorActualizado != null) {
             entranadorActualizado.setNombre(nombre);
             entranadorActualizado.setEspecialidad(especialidad);
-            return  true;
+            return true;
 
         }
         return false;
     }
 
-    public boolean eliminarEntrenador(String id){
-       Entrenador entrenadorEliminado = obtenerEntrenador(id);
-        if(entrenadorEliminado != null){
+    public boolean eliminarEntrenador(String id) {
+        Entrenador entrenadorEliminado = obtenerEntrenador(id);
+        if (entrenadorEliminado != null) {
             listaEntrenadores.remove(entrenadorEliminado);
-            return  true;
+            return true;
         }
         return false;
     }
@@ -106,62 +105,41 @@ public class Gimnasio {
     //CRUD CLASE
 
     public String crearClase(String id, String nombre, String horario, int capacidad, int disponibilidad, LocalDate fechaInicio, LocalDate fechaFin,
-                             EstadoDisponibilidad estadoDisponibilidad, TipoClase tipoClase, Entrenador entrenador){
+                             EstadoDisponibilidad estadoDisponibilidad, TipoClase tipoClase, Entrenador entrenador) {
         Clase clase = obtenerClase(id);
-        if(clase.getId() == null ){
-            clase = new Clase(id,nombre,horario,capacidad, disponibilidad, fechaInicio,fechaFin,estadoDisponibilidad,tipoClase,entrenador);
+        if (clase.getId() == null) {
+            clase = new Clase(id, nombre, horario, capacidad, disponibilidad, fechaInicio, fechaFin, estadoDisponibilidad, tipoClase, entrenador);
             listaClases.add(clase);
             return "La clase ha sido creada con éxito";
         }
         return null;
     }
 
-    public Clase obtenerClase(String id){
-        for(Clase clase:listaClases){
-            if(clase.getId().equalsIgnoreCase(id)){
+    public Clase obtenerClase(String id) {
+        for (Clase clase : listaClases) {
+            if (clase.getId().equalsIgnoreCase(id)) {
                 return clase;
             }
         }
         return null;
     }
 
+    public boolean cancelarClase(String id) {
+        boolean cancelado = false;
+        for (int i = 0; i <= listaClases.size(); i++) {
 
+            if (listaClases.get(i).getId() == id) {
+                int disponibilidad = listaClases.get(i).getDisponibilidad();
+                listaClases.get(i).setDisponibilidad(disponibilidad);
+                disponibilidad++;
+                cancelado = true;
+            } else {
+                System.out.println("No se encontró la clase con id: " + id);
+            }
 
-    public boolean cancelarClase(String id){
-        Clase claseCancelada = obtenerClase(id);
-        if(claseCancelada!=null){
-            listaClases.remove(claseCancelada);
-            return true;
         }
-        return false;
+        return cancelado;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 
