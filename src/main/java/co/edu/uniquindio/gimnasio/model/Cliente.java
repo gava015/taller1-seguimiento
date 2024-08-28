@@ -14,9 +14,6 @@ public class Cliente extends Usuario {
 
 
 
-
-
-
     public Cliente(String nombre, String id, String correo, String direccion, String telefono, String contrasenia) {
         super(nombre, id);
         this.correo = correo;

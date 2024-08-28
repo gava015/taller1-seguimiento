@@ -103,6 +103,8 @@ public class Gimnasio {
         return false;
     }
 
+    //CRUD CLASE
+
     public String crearClase(String id, String nombre, String horario, int capacidad, LocalDate fechaInicio, LocalDate fechaFin,
                              EstadoDisponibilidad estadoDisponibilidad, TipoClase tipoClase, Entrenador entrenador){
         Clase clase = obtenerClase(id);
@@ -114,7 +116,6 @@ public class Gimnasio {
         return null;
     }
 
-
     public Clase obtenerClase(String id){
         for(Clase clase:listaClases){
             if(clase.getId().equalsIgnoreCase(id)){
@@ -122,6 +123,15 @@ public class Gimnasio {
             }
         }
         return null;
+    }
+
+    public boolean cancelarClae(String id){
+        Clase claseCancelada = obtenerClase(id);
+        if(claseCancelada!=null){
+            listaClases.remove(claseCancelada);
+            return true;
+        }
+        return false;
     }
 
 
