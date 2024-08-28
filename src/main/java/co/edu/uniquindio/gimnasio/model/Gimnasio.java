@@ -105,11 +105,11 @@ public class Gimnasio {
 
     //CRUD CLASE
 
-    public String crearClase(String id, String nombre, String horario, int capacidad, LocalDate fechaInicio, LocalDate fechaFin,
+    public String crearClase(String id, String nombre, String horario, int capacidad, int disponibilidad, LocalDate fechaInicio, LocalDate fechaFin,
                              EstadoDisponibilidad estadoDisponibilidad, TipoClase tipoClase, Entrenador entrenador){
         Clase clase = obtenerClase(id);
         if(clase.getId() == null ){
-            clase = new Clase(id,nombre,horario,capacidad,fechaInicio,fechaFin,estadoDisponibilidad,tipoClase,entrenador);
+            clase = new Clase(id,nombre,horario,capacidad, disponibilidad, fechaInicio,fechaFin,estadoDisponibilidad,tipoClase,entrenador);
             listaClases.add(clase);
             return "La clase ha sido creada con éxito";
         }
@@ -125,7 +125,9 @@ public class Gimnasio {
         return null;
     }
 
-    public boolean cancelarClae(String id){
+
+
+    public boolean cancelarClase(String id){
         Clase claseCancelada = obtenerClase(id);
         if(claseCancelada!=null){
             listaClases.remove(claseCancelada);

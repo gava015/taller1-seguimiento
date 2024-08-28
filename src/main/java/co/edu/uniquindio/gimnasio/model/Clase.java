@@ -12,6 +12,7 @@ public class Clase {
     private String nombre;
     private String horario;
     private int capacidad;
+    private int disponibilidad;
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private EstadoDisponibilidad estadoDisponibilidad;
@@ -23,12 +24,13 @@ public class Clase {
     public Clase() {
     }
 
-    public Clase(String id, String nombre, String horario, int capacidad, LocalDate fechaInicio, LocalDate fechaFin,
+    public Clase(String id, String nombre, String horario, int capacidad, int disponibilidad, LocalDate fechaInicio, LocalDate fechaFin,
                  EstadoDisponibilidad estadoDisponibilidad, TipoClase tipoClase, Entrenador entrenador) {
         this.id = id;
         this.nombre = nombre;
         this.horario = horario;
         this.capacidad = capacidad;
+        this.disponibilidad = capacidad;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.estadoDisponibilidad = estadoDisponibilidad;
@@ -117,13 +119,21 @@ public class Clase {
         this.listaInscritos = listaInscritos;
     }
 
+    public int getDisponibilidad() {
+        return disponibilidad;
+    }
+    public void setDisponibilidad(int disponibilidad) {
+        this.disponibilidad = disponibilidad;
+    }
+
     @Override
     public String toString() {
         return "Clase{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", horario='" + horario + '\'' +
                 ", capacidad=" + capacidad +
+                ", disponibilidad=" + disponibilidad +
                 ", fechaInicio=" + fechaInicio +
                 ", fechaFin=" + fechaFin +
                 ", estadoDisponibilidad=" + estadoDisponibilidad +
@@ -133,3 +143,4 @@ public class Clase {
                 '}';
     }
 }
+
