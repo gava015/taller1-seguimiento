@@ -5,8 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ee9c0485-56ed-488b-b7f4-c250987caf0b" name="Changes" comment="">
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/gimnasio/model/Entrenamiento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/gimnasio/model/Entrenamiento.java" afterDir="false" />
+=======
+>>>>>>> Stashed changes
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/gimnasio/model/Gimnasio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/gimnasio/model/Gimnasio.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,7 +38,10 @@
     <option name="version" value="2" />
   </component>
   <component name="ProjectColorInfo"><![CDATA[{
+<<<<<<< Updated upstream
   "customColor": "",
+=======
+>>>>>>> Stashed changes
   "associatedIndex": 5
 }]]></component>
   <component name="ProjectId" id="2kynRcFKIGz9fHCAluzc4xH0Jcl" />
@@ -46,9 +52,15 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+<<<<<<< Updated upstream
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+=======
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "ignore.virus.scanning.warn.message": "true",
+>>>>>>> Stashed changes
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -74,7 +86,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1724264680083</updated>
+<<<<<<< Updated upstream
       <workItem from="1724851364718" duration="16617000" />
+=======
+      <workItem from="1724817530305" duration="1949000" />
+>>>>>>> Stashed changes
     </task>
     <task id="LOCAL-00001" summary="primer cambio">
       <created>1724806796071</created>
@@ -89,8 +105,11 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+<<<<<<< Updated upstream
   <component name="VcsManagerConfiguration">
     <MESSAGE value="primer cambio" />
     <option name="LAST_COMMIT_MESSAGE" value="primer cambio" />
   </component>
+=======
+>>>>>>> Stashed changes
 </project>

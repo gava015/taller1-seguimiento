@@ -38,6 +38,7 @@ public class Gimnasio {
     }
 
 
+<<<<<<< Updated upstream
     public boolean actualizarCliente(String id, String nombre, String correo, String contrasenia) {
         Cliente clienteActualizar = obtenerCliente(id);
         if (clienteActualizar != null) {
@@ -45,6 +46,15 @@ public class Gimnasio {
             clienteActualizar.setCorreo(correo);
             clienteActualizar.setContrasenia(contrasenia);
             return true;
+=======
+        public boolean actualizarCliente(String nombre,String correo, String direccion, String telefono, String contraseña) {
+            Cliente cliente = obtenerCliente(id);
+            if (cliente != null) {
+                cliente.setNombre(nombre);
+                cliente.setCorreo
+                vendedor.setEdad(edad);
+                return true;
+>>>>>>> Stashed changes
 
         }
         return false;
