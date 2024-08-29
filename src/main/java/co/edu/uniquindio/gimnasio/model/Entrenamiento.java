@@ -3,7 +3,6 @@ package co.edu.uniquindio.gimnasio.model;
 import co.edu.uniquindio.gimnasio.Enum.TipoEntrenamiento;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Entrenamiento {
     private TipoEntrenamiento tipoEntrenamiento;
@@ -13,7 +12,7 @@ public class Entrenamiento {
     private LocalDate fecha;
 
 
-    public Entrenamiento() {
+    public Entrenamiento(TipoEntrenamiento tipoEntrenamiento, int duracionEntrenamiento, int kcalorias) {
     }
 
     public Entrenamiento(TipoEntrenamiento tipoEntrenamiento, int duracionEntrenamiento, int id, int kcalorias, LocalDate fecha) {

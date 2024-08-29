@@ -2,10 +2,12 @@ package co.edu.uniquindio.gimnasio.model;
 
 import co.edu.uniquindio.gimnasio.Enum.EstadoDisponibilidad;
 import co.edu.uniquindio.gimnasio.Enum.TipoClase;
+import co.edu.uniquindio.gimnasio.Enum.TipoEntrenamiento;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Gimnasio {
     private String nombre;
@@ -14,18 +16,17 @@ public class Gimnasio {
     private List<Entrenador> listaEntrenadores;
     private List<Clase> listaClases;
 
-
-    public String crearCliente(String nombre, String id, String correo, String direccion, String telefono, String contraseña) {
+    //CRUD CLIENTE
+    public String crearCliente(String nombre, String id, String correo, String direccion, String telefono, String contrasenia) {
         Cliente cliente = obtenerCliente(id);
         if (cliente == null) {
-            cliente = new Cliente(nombre, id, correo, direccion, telefono, contraseña);
+            cliente = new Cliente(nombre, id, correo, direccion, telefono, contrasenia);
             listaClientes.add(cliente);
             return "Cliente creado con existo";
         } else {
             return "x";
         }
     }
-
 
     public Cliente obtenerCliente(String id) {
         for (Cliente cliente : listaClientes) {
@@ -102,7 +103,7 @@ public class Gimnasio {
         return false;
     }
 
-    //CRUD CLASE
+    //CLASE
 
     public String crearClase(String id, String nombre, String horario, int capacidad, int disponibilidad, LocalDate fechaInicio, LocalDate fechaFin,
                              EstadoDisponibilidad estadoDisponibilidad, TipoClase tipoClase, Entrenador entrenador) {
@@ -117,14 +118,27 @@ public class Gimnasio {
 
     public Clase obtenerClase(String id) {
         for (Clase clase : listaClases) {
-            if (clase.getId().equalsIgnoreCase(id)) {
+            if (clase.getId().equalsIgnoreCase(id)){
                 return clase;
             }
         }
         return null;
     }
 
-    public boolean cancelarClase(String id) {
+    public void inscribirClase(int id, Cliente cliente, LocalDate fechaRegistro, int disponibilidad, int capacidad){
+
+                Inscripcion inscripcion = new Inscripcion(id,cliente,fechaRegistro);
+
+        for (int i = 0; i<= listaClases.size(); i++ ){
+            Clase claseRequerida = listaClases.get(i);
+            if(claseRequerida.getId().equalsIgnoreCase(String.valueOf(id))) {
+                claseRequerida.getListaInscritos().add(inscripcion);
+            }
+
+        }
+    }
+
+    public boolean cancelarInscripcion(String id) {
         boolean cancelado = false;
         for (int i = 0; i <= listaClases.size(); i++) {
 
@@ -140,6 +154,7 @@ public class Gimnasio {
         }
         return cancelado;
     }
+
 }
 
 
