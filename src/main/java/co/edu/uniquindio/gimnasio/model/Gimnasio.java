@@ -16,6 +16,14 @@ public class Gimnasio {
     private List<Entrenador> listaEntrenadores;
     private List<Clase> listaClases;
 
+    public Gimnasio(String nombre, String direccion) {
+        this.nombre = nombre;
+        this.direccion = direccion;
+        listaClientes = new ArrayList<>();
+        this.listaEntrenadores = new ArrayList<>();
+        this.listaClases = new ArrayList<>();
+    }
+
     //CRUD CLIENTE
     public String crearCliente(String nombre, String id, String correo, String direccion, String telefono, String contrasenia) {
         Cliente cliente = obtenerCliente(id);
@@ -38,7 +46,6 @@ public class Gimnasio {
     }
 
 
-<<<<<<< Updated upstream
     public boolean actualizarCliente(String id, String nombre, String correo, String contrasenia) {
         Cliente clienteActualizar = obtenerCliente(id);
         if (clienteActualizar != null) {
@@ -46,15 +53,6 @@ public class Gimnasio {
             clienteActualizar.setCorreo(correo);
             clienteActualizar.setContrasenia(contrasenia);
             return true;
-=======
-        public boolean actualizarCliente(String nombre,String correo, String direccion, String telefono, String contraseña) {
-            Cliente cliente = obtenerCliente(id);
-            if (cliente != null) {
-                cliente.setNombre(nombre);
-                cliente.setCorreo
-                vendedor.setEdad(edad);
-                return true;
->>>>>>> Stashed changes
 
         }
         return false;
@@ -78,7 +76,7 @@ public class Gimnasio {
             listaEntrenadores.add(entrenador);
             return "Entrenador creado con existo";
         } else {
-            return "x";
+            return "No fue posible crear este Entrenador";
         }
     }
 
@@ -128,23 +126,22 @@ public class Gimnasio {
 
     public Clase obtenerClase(String id) {
         for (Clase clase : listaClases) {
-            if (clase.getId().equalsIgnoreCase(id)){
+            if (clase.getId().equalsIgnoreCase(id)) {
                 return clase;
             }
         }
         return null;
     }
 
-    public void inscribirClase(int id, Cliente cliente, LocalDate fechaRegistro, int disponibilidad, int capacidad){
+    public void inscribirClase(int id, Cliente cliente, LocalDate fechaRegistro, int disponibilidad, int capacidad) {
 
-                Inscripcion inscripcion = new Inscripcion(id,cliente,fechaRegistro);
+        Inscripcion inscripcion = new Inscripcion(id, cliente, fechaRegistro);
 
-        for (int i = 0; i<= listaClases.size(); i++ ){
+        for (int i = 0; i <= listaClases.size(); i++) {
             Clase claseRequerida = listaClases.get(i);
-            if(claseRequerida.getId().equalsIgnoreCase(String.valueOf(id))) {
+            if (claseRequerida.getId().equalsIgnoreCase(String.valueOf(id))) {
                 claseRequerida.getListaInscritos().add(inscripcion);
             }
-
         }
     }
 
@@ -165,7 +162,27 @@ public class Gimnasio {
         return cancelado;
     }
 
+    public void inscribirEntrenamiento(TipoEntrenamiento tipoEntrenamiento, int duracionEntrenamiento,
+                                       int kcalorias, LocalDate fecha, String id) {
+        Cliente cliente = obtenerCliente(id);
+        Entrenamiento entrenamiento = new Entrenamiento(tipoEntrenamiento, duracionEntrenamiento, kcalorias);
+            cliente.getListaHistorial().add(entrenamiento);
+    }
+
+    public void consultarHistorial(int id,Cliente cliente) {
+
+        System.out.println("Historial de entrenamientos para " + cliente.getNombre() + ":");
+        for (Entrenamiento entrenamiento:cliente.getListaHistorial()) {
+            System.out.println(cliente.toString());
+        }
+    }
 }
+
+
+
+
+
+
 
 
 
