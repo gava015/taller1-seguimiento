@@ -3,24 +3,25 @@ package co.edu.uniquindio.gimnasio.model;
 import java.time.LocalDate;
 
 public class Inscripcion {
-    private int id;
+    private String id;
     private Cliente cliente;
     private LocalDate fechaRegistro;
 
     public Inscripcion() {
     }
 
-    public Inscripcion(int id, Cliente cliente, LocalDate fechaRegistro) {
+    public Inscripcion(String id, Cliente cliente, LocalDate fechaRegistro) {
         this.id = id;
         this.cliente = cliente;
         this.fechaRegistro = fechaRegistro;
     }
 
-    public int getId() {
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

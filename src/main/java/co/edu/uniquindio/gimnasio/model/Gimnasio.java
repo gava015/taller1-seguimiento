@@ -3,11 +3,10 @@ package co.edu.uniquindio.gimnasio.model;
 import co.edu.uniquindio.gimnasio.Enum.EstadoDisponibilidad;
 import co.edu.uniquindio.gimnasio.Enum.TipoClase;
 import co.edu.uniquindio.gimnasio.Enum.TipoEntrenamiento;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
+
 
 public class Gimnasio {
     private String nombre;
@@ -113,11 +112,11 @@ public class Gimnasio {
 
     //CLASE
 
-    public String crearClase(String id, String nombre, String horario, int capacidad, int disponibilidad, LocalDate fechaInicio, LocalDate fechaFin,
+    public String crearClase(String id, String nombre, String horario, int capacidad, LocalDate fechaInicio, LocalDate fechaFin,
                              EstadoDisponibilidad estadoDisponibilidad, TipoClase tipoClase, Entrenador entrenador) {
         Clase clase = obtenerClase(id);
         if (clase.getId() == null) {
-            clase = new Clase(id, nombre, horario, capacidad, disponibilidad, fechaInicio, fechaFin, estadoDisponibilidad, tipoClase, entrenador);
+            clase = new Clase(id, nombre, horario, capacidad, fechaInicio, fechaFin, estadoDisponibilidad, tipoClase, entrenador);
             listaClases.add(clase);
             return "La clase ha sido creada con éxito";
         }
@@ -133,46 +132,59 @@ public class Gimnasio {
         return null;
     }
 
-    public void inscribirClase(int id, Cliente cliente, LocalDate fechaRegistro, int disponibilidad, int capacidad) {
-
-        Inscripcion inscripcion = new Inscripcion(id, cliente, fechaRegistro);
-
-        for (int i = 0; i <= listaClases.size(); i++) {
-            Clase claseRequerida = listaClases.get(i);
-            if (claseRequerida.getId().equalsIgnoreCase(String.valueOf(id))) {
-                claseRequerida.getListaInscritos().add(inscripcion);
-            }
+    public String inscribirClase(String claseId, Cliente cliente) throws Exception {
+        Clase claseBuscada = obtenerClase(claseId);
+        if(claseBuscada == null){
+            throw new Exception("La clase buscada no existe");
         }
+
+        String mensajeRespuesta = "Esta clase " + claseBuscada.getNombre() + "no tiene cupos disponibles";
+        if (claseBuscada.getEstadoDisponibilidad() == EstadoDisponibilidad.DISPONIBLE) {
+            Inscripcion inscripcion = new Inscripcion(claseId, cliente, LocalDate.now());
+            claseBuscada.getListaInscritos().add(inscripcion);
+            claseBuscada.sincronizarDisponibilidad();
+            mensajeRespuesta = "Se realizó la inscripción con éxito";
+        }
+
+        return mensajeRespuesta;
     }
 
-    public boolean cancelarInscripcion(String id) {
-        boolean cancelado = false;
-        for (int i = 0; i <= listaClases.size(); i++) {
 
-            if (listaClases.get(i).getId() == id) {
-                int disponibilidad = listaClases.get(i).getDisponibilidad();
-                listaClases.get(i).setDisponibilidad(disponibilidad);
-                disponibilidad++;
-                cancelado = true;
-            } else {
-                System.out.println("No se encontró la clase con id: " + id);
-            }
-
+    public String cancelarInscripcion(String claseId, String clienteId) throws Exception {
+        Clase claseCancelada = obtenerClase(claseId);
+        if(claseCancelada == null){
+            throw new Exception("La clase que desea cancelar no existe");
         }
-        return cancelado;
+
+        String mensajeRespuesta = "El cliente no se encuentra inscrito en la clase";
+        List<Inscripcion> listaInscritos = claseCancelada.getListaInscritos();
+        for (int i = 0; i < listaInscritos.size(); i++) {
+            Inscripcion clienteInscrito = listaInscritos.get(i);
+            if (clienteInscrito.getId() == clienteId) {
+                listaInscritos.remove(clienteInscrito);
+                claseCancelada.sincronizarDisponibilidad();
+                mensajeRespuesta = "La inscripción se canceló con éxito";
+            }
+        }
+        return mensajeRespuesta;
+
     }
 
-    public void inscribirEntrenamiento(TipoEntrenamiento tipoEntrenamiento, int duracionEntrenamiento,
-                                       int kcalorias, LocalDate fecha, String id) {
-        Cliente cliente = obtenerCliente(id);
+
+    public void inscribirEntrenamientoCliente(String clienteId, TipoEntrenamiento tipoEntrenamiento, int duracionEntrenamiento,
+                                       int kcalorias, LocalDate fecha) {
+        Cliente cliente = obtenerCliente(clienteId);
         Entrenamiento entrenamiento = new Entrenamiento(tipoEntrenamiento, duracionEntrenamiento, kcalorias);
-            cliente.getListaHistorial().add(entrenamiento);
+        cliente.getListaHistorial().add(entrenamiento);
     }
 
-    public void consultarHistorial(int id,Cliente cliente) {
+
+
+
+    public void consultarHistorial(int id, Cliente cliente) {
 
         System.out.println("Historial de entrenamientos para " + cliente.getNombre() + ":");
-        for (Entrenamiento entrenamiento:cliente.getListaHistorial()) {
+        for (Entrenamiento entrenamiento : cliente.getListaHistorial()) {
             System.out.println(cliente.toString());
         }
     }
