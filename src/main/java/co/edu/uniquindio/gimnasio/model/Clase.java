@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Clase {
-    private String id;
+    private String claseId;
     private String nombre;
     private String horario;
     private int capacidad;
@@ -22,9 +22,9 @@ public class Clase {
     public Clase() {
     }
 
-    public Clase(String id, String nombre, String horario, int capacidad, LocalDate fechaInicio, LocalDate fechaFin,
+    public Clase(String claseId, String nombre, String horario, int capacidad, LocalDate fechaInicio, LocalDate fechaFin,
                  EstadoDisponibilidad estadoDisponibilidad, TipoClase tipoClase, Entrenador entrenador) {
-        this.id = id;
+        this.claseId = claseId;
         this.nombre = nombre;
         this.horario = horario;
         this.capacidad = capacidad;
@@ -36,12 +36,12 @@ public class Clase {
         listaInscritos = new ArrayList<>();
     }
 
-    public String getId() {
-        return id;
+    public String getClaseId() {
+        return claseId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setClaseId(String claseId) {
+        this.claseId = claseId;
     }
 
     public String getNombre() {
@@ -129,7 +129,7 @@ public class Clase {
     @Override
     public String toString() {
         return "Clase{" +
-                "id='" + id + '\'' +
+                "claseId='" + claseId + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", horario='" + horario + '\'' +
                 ", capacidad=" + capacidad +

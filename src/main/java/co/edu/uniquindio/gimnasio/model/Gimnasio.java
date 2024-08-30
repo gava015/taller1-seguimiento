@@ -24,18 +24,22 @@ public class Gimnasio {
     }
 
     //CRUD CLIENTE
-    public String crearCliente(String nombre, String id, String correo, String direccion, String telefono, String contrasenia) {
+    public Cliente crearCliente(String nombre, String id, String correo, String direccion, String telefono, String contrasenia) throws Exception {
         Cliente cliente = obtenerCliente(id);
         if (cliente == null) {
             cliente = new Cliente(nombre, id, correo, direccion, telefono, contrasenia);
             listaClientes.add(cliente);
-            return "Cliente creado con existo";
-        } else {
-            return "x";
+            return cliente;
         }
+
+        return null;
     }
 
-    public Cliente obtenerCliente(String id) {
+    public Cliente obtenerCliente(String id) throws Exception {
+        if(id.equals("")){
+            throw new Exception("El id del cliente no puede ser vacío");
+        }
+
         for (Cliente cliente : listaClientes) {
             if (cliente.getId().equalsIgnoreCase(id)) {
                 return cliente;
@@ -45,7 +49,7 @@ public class Gimnasio {
     }
 
 
-    public boolean actualizarCliente(String id, String nombre, String correo, String contrasenia) {
+    public boolean actualizarCliente(String id, String nombre, String correo, String contrasenia) throws Exception {
         Cliente clienteActualizar = obtenerCliente(id);
         if (clienteActualizar != null) {
             clienteActualizar.setNombre(nombre);
@@ -57,7 +61,7 @@ public class Gimnasio {
         return false;
     }
 
-    public boolean eliminarCliente(String id) {
+    public boolean eliminarCliente(String id) throws Exception {
         Cliente clienteEliminado = obtenerCliente(id);
         if (clienteEliminado != null) {
             listaClientes.remove(clienteEliminado);
@@ -68,15 +72,14 @@ public class Gimnasio {
 
     //CRUD ENTRENADOR
 
-    public String crearEntrenador(String nombre, String id, String especialidad) {
+    public Entrenador crearEntrenador(String nombre, String id, String especialidad) {
         Entrenador entrenador = obtenerEntrenador(id);
         if (entrenador == null) {
             entrenador = new Entrenador(nombre, id, especialidad);
             listaEntrenadores.add(entrenador);
-            return "Entrenador creado con existo";
-        } else {
-            return "No fue posible crear este Entrenador";
+            return entrenador;
         }
+        return null;
     }
 
 
@@ -112,20 +115,27 @@ public class Gimnasio {
 
     //CLASE
 
-    public String crearClase(String id, String nombre, String horario, int capacidad, LocalDate fechaInicio, LocalDate fechaFin,
-                             EstadoDisponibilidad estadoDisponibilidad, TipoClase tipoClase, Entrenador entrenador) {
+    public Clase crearClase(String id,
+                             String nombre,
+                             String horario,
+                             int capacidad,
+                             LocalDate fechaInicio,
+                             LocalDate fechaFin,
+                             EstadoDisponibilidad estadoDisponibilidad,
+                             TipoClase tipoClase,
+                             Entrenador entrenador) {
         Clase clase = obtenerClase(id);
-        if (clase.getId() == null) {
+        if(clase == null) {
             clase = new Clase(id, nombre, horario, capacidad, fechaInicio, fechaFin, estadoDisponibilidad, tipoClase, entrenador);
             listaClases.add(clase);
-            return "La clase ha sido creada con éxito";
+            return clase;
         }
         return null;
     }
 
     public Clase obtenerClase(String id) {
         for (Clase clase : listaClases) {
-            if (clase.getId().equalsIgnoreCase(id)) {
+            if (clase.getClaseId().equalsIgnoreCase(id)) {
                 return clase;
             }
         }
@@ -133,11 +143,11 @@ public class Gimnasio {
     }
 
     public String inscribirClase(String claseId, Cliente cliente) throws Exception {
-        Clase claseBuscada = obtenerClase(claseId);
-        if(claseBuscada == null){
-            throw new Exception("La clase buscada no existe");
+        if(claseId == "" || cliente == null){
+            throw new Exception("Datos incorrectos");
         }
 
+        Clase claseBuscada = obtenerClase(claseId);
         String mensajeRespuesta = "Esta clase " + claseBuscada.getNombre() + "no tiene cupos disponibles";
         if (claseBuscada.getEstadoDisponibilidad() == EstadoDisponibilidad.DISPONIBLE) {
             Inscripcion inscripcion = new Inscripcion(claseId, cliente, LocalDate.now());
@@ -149,44 +159,54 @@ public class Gimnasio {
         return mensajeRespuesta;
     }
 
-
     public String cancelarInscripcion(String claseId, String clienteId) throws Exception {
-        Clase claseCancelada = obtenerClase(claseId);
-        if(claseCancelada == null){
-            throw new Exception("La clase que desea cancelar no existe");
+        if(claseId == "" || clienteId == null){
+            throw new Exception("Datos incorrectos");
         }
 
+        Clase claseCancelada = obtenerClase(claseId);
         String mensajeRespuesta = "El cliente no se encuentra inscrito en la clase";
+
         List<Inscripcion> listaInscritos = claseCancelada.getListaInscritos();
         for (int i = 0; i < listaInscritos.size(); i++) {
             Inscripcion clienteInscrito = listaInscritos.get(i);
-            if (clienteInscrito.getId() == clienteId) {
+            if (clienteInscrito.getCliente().getId().equalsIgnoreCase(clienteId)) {
                 listaInscritos.remove(clienteInscrito);
                 claseCancelada.sincronizarDisponibilidad();
                 mensajeRespuesta = "La inscripción se canceló con éxito";
             }
         }
-        return mensajeRespuesta;
 
+        return mensajeRespuesta;
     }
 
 
-    public void inscribirEntrenamientoCliente(String clienteId, TipoEntrenamiento tipoEntrenamiento, int duracionEntrenamiento,
-                                       int kcalorias, LocalDate fecha) {
+    public void inscribirEntrenamientoCliente(String clienteId,
+                                              TipoEntrenamiento tipoEntrenamiento,
+                                              int duracionEntrenamiento,
+                                              int kcalorias) throws Exception {
         Cliente cliente = obtenerCliente(clienteId);
         Entrenamiento entrenamiento = new Entrenamiento(tipoEntrenamiento, duracionEntrenamiento, kcalorias);
         cliente.getListaHistorial().add(entrenamiento);
     }
 
 
-
-
     public void consultarHistorial(int id, Cliente cliente) {
-
         System.out.println("Historial de entrenamientos para " + cliente.getNombre() + ":");
         for (Entrenamiento entrenamiento : cliente.getListaHistorial()) {
             System.out.println(cliente.toString());
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Gimnasio{" +
+                "nombre='" + nombre + '\'' +
+                ", direccion='" + direccion + '\'' +
+                ", listaClientes=" + listaClientes.size() +
+                ", listaEntrenadores=" + listaEntrenadores.size() +
+                ", listaClases=" + listaClases.size() +
+                '}';
     }
 }
 
