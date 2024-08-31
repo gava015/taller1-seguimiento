@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="ee9c0485-56ed-488b-b7f4-c250987caf0b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/gimnasio/model/Entrenamiento.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/gimnasio/model/Entrenamiento.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/gimnasio/model/Gimnasio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/gimnasio/model/Gimnasio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/gimnasio/servicio/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/co/edu/uniquindio/gimnasio/servicio/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -109,8 +111,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.GimnasioTest" />
-        <item itemvalue="TestNG.GimnasioTest" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="TestNG.GimnasioTest" />
       </list>
     </recent_temporary>
   </component>
@@ -153,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1725077844328</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Modifiación del metodo obtenerHistorialCliente">
+      <created>1725079325352</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1725079325352</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,6 +171,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="primer cambio" />
     <MESSAGE value="Se agregan los test unitarios" />
-    <option name="LAST_COMMIT_MESSAGE" value="Se agregan los test unitarios" />
+    <MESSAGE value="Modifiación del metodo obtenerHistorialCliente" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modifiación del metodo obtenerHistorialCliente" />
   </component>
 </project>

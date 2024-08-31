@@ -12,14 +12,14 @@ public class Entrenamiento {
     private LocalDate fecha;
 
 
-    public Entrenamiento(TipoEntrenamiento tipoEntrenamiento, int duracionEntrenamiento, int kcalorias) {
+    public Entrenamiento() {
     }
 
     public Entrenamiento(TipoEntrenamiento tipoEntrenamiento, int duracionEntrenamiento, int id, int kcalorias, LocalDate fecha) {
         this.tipoEntrenamiento = tipoEntrenamiento;
         this.duracionEntrenamiento = duracionEntrenamiento;
         this.id = id;
-        Kcalorias = kcalorias;
+        this.Kcalorias = kcalorias;
         this.fecha = fecha;
 
     }

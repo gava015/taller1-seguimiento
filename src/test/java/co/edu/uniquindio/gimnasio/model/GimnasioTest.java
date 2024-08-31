@@ -85,7 +85,7 @@ public class GimnasioTest {
         Gimnasio gimnasio = new Gimnasio("marval", "acacias");
         Cliente cliente = gimnasio.crearCliente("Tefa", "1094", "tefa@", "tebaida", "311762", "tefa12");
 
-        gimnasio.inscribirEntrenamientoCliente(cliente.getId(), TipoEntrenamiento.POTENCIA, 1, 1);
+        gimnasio.inscribirEntrenamientoCliente(cliente.getId(), TipoEntrenamiento.POTENCIA, 1, 1,200,LocalDate.now());
 
         assertEquals(1, cliente.getListaHistorial().size());
     }
@@ -95,7 +95,7 @@ public class GimnasioTest {
         Gimnasio gimnasio = new Gimnasio("marval", "acacias");
 
         Exception exception = assertThrows(Exception.class, () -> {
-            gimnasio.inscribirEntrenamientoCliente("", TipoEntrenamiento.POTENCIA, 1, 1);
+            gimnasio.inscribirEntrenamientoCliente("", TipoEntrenamiento.POTENCIA, 1, 1,400,LocalDate.now());
         });
 
         assertEquals("El id del cliente no puede ser vacío", exception.getMessage());

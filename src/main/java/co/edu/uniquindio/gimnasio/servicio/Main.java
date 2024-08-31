@@ -34,10 +34,11 @@ public class Main {
             gimnasio.inscribirClase("008", cliente3);
             gimnasio.cancelarInscripcion("001", "1098");
 
-            gimnasio.inscribirEntrenamientoCliente(cliente1.getId(), TipoEntrenamiento.POTENCIA,1, 230);
-            gimnasio.inscribirEntrenamientoCliente(cliente2.getId(), TipoEntrenamiento.FUERZA,2, 150);
+            gimnasio.inscribirEntrenamientoCliente(cliente1.getId(), TipoEntrenamiento.POTENCIA,1, 230,150,LocalDate.now());
+            gimnasio.inscribirEntrenamientoCliente(cliente2.getId(), TipoEntrenamiento.FUERZA,2, 150,320,LocalDate.now());
 
             System.out.println(cliente1.getListaHistorial().size());
+            gimnasio.consultarHistorialEntrenamiento("1094");
 
         }catch (Exception ex){
             System.out.println("Lo sentimos, ocurrió un error: [" + ex.getMessage()+ "]");

@@ -181,12 +181,9 @@ public class Gimnasio {
     }
 
 
-    public void inscribirEntrenamientoCliente(String clienteId,
-                                              TipoEntrenamiento tipoEntrenamiento,
-                                              int duracionEntrenamiento,
-                                              int kcalorias) throws Exception {
+    public void inscribirEntrenamientoCliente(String clienteId,TipoEntrenamiento tipoEntrenamiento, int duracionEntrenamiento, int id, int kcalorias, LocalDate fecha) throws Exception {
         Cliente cliente = obtenerCliente(clienteId);
-        Entrenamiento entrenamiento = new Entrenamiento(tipoEntrenamiento, duracionEntrenamiento, kcalorias);
+        Entrenamiento entrenamiento = new Entrenamiento(tipoEntrenamiento, duracionEntrenamiento, id, kcalorias,fecha );
         cliente.getListaHistorial().add(entrenamiento);
     }
 
