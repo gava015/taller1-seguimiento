@@ -191,11 +191,12 @@ public class Gimnasio {
     }
 
 
-    public void consultarHistorial(int id, Cliente cliente) {
-        System.out.println("Historial de entrenamientos para " + cliente.getNombre() + ":");
-        for (Entrenamiento entrenamiento : cliente.getListaHistorial()) {
-            System.out.println(cliente.toString());
-        }
+    public void consultarHistorialEntrenamiento( String clienteId) throws Exception {
+         Cliente clienteHistorial = obtenerCliente(clienteId);
+         for(int i=0; i < clienteHistorial.getListaHistorial().size(); i++){
+             System.out.println(clienteHistorial.getListaHistorial().get(i));
+
+         }
     }
 
     @Override
